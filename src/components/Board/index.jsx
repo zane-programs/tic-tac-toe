@@ -25,15 +25,16 @@ function Row(props) {
 }
 
 function Square(props) {
-  const { squares, setSquares } = useContext(GameContext);
+  const { squares, setSquares, player, setPlayer } = useContext(GameContext);
 
   const handleSquareClick = useCallback(
     (squareIndex) => {
       let squaresCopy = squares.slice();
-      squaresCopy[squareIndex] = "X";
+      squaresCopy[squareIndex] = player; // X or O
+      setPlayer(player === "X" ? "O" : "X"); // other player plays now
       setSquares(squaresCopy);
     },
-    [squares, setSquares]
+    [squares, setSquares, player, setPlayer]
   );
 
   return (

@@ -2,7 +2,7 @@ import styles from "./Board.module.css";
 import GameContext from "../../context/GameContext";
 import { useCallback, useContext } from "react";
 
-export default function Board(props) {
+export default function Board() {
   return (
     <table className={styles.ticTacToe}>
       <tbody>
@@ -25,16 +25,18 @@ function Row(props) {
 }
 
 function Square(props) {
-  const { squares, setSquares, player, setPlayer } = useContext(GameContext);
+  const { squares, setSquares, player, setPlayer, winner } = useContext(GameContext);
 
   const handleSquareClick = useCallback(
     (squareIndex) => {
-      let squaresCopy = squares.slice();
-      squaresCopy[squareIndex] = player; // X or O
-      setPlayer(player === "X" ? "O" : "X"); // other player plays now
-      setSquares(squaresCopy);
+      if (!winner && !squares[squareIndex]) {
+        let squaresCopy = squares.slice();
+        squaresCopy[squareIndex] = player; // X or O
+        setPlayer(player === "X" ? "O" : "X"); // other player plays now
+        setSquares(squaresCopy);
+      }
     },
-    [squares, setSquares, player, setPlayer]
+    [squares, setSquares, player, setPlayer, winner]
   );
 
   return (

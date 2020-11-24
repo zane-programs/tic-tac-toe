@@ -1,6 +1,11 @@
 import styles from "./Board.module.css";
 import GameContext from "../../context/GameContext";
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useMemo } from "react";
+
+const PLAYER_COLORS = {
+  X: "#f00",
+  O: "#00f",
+};
 
 export default function Board() {
   return (
@@ -25,7 +30,9 @@ function Row(props) {
 }
 
 function Square(props) {
-  const { squares, setSquares, player, setPlayer, winner } = useContext(GameContext);
+  const { squares, setSquares, player, setPlayer, winner } = useContext(
+    GameContext
+  );
 
   const handleSquareClick = useCallback(
     (squareIndex) => {
@@ -39,9 +46,14 @@ function Square(props) {
     [squares, setSquares, player, setPlayer, winner]
   );
 
+  const squareColor = useMemo(() => {
+    if (!squares[props.index]) return "#000";
+    return PLAYER_COLORS[squares[props.index]];
+  }, [squares, props.index]);
+
   return (
     <td onClick={() => handleSquareClick(props.index)}>
-      {squares[props.index]}
+      <span style={{ color: squareColor }}>{squares[props.index]}</span>
     </td>
   );
 }

@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
+
+.ticTacToe {
+  border-collapse: collapse;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+
+  position: relative;
+  top: 0; /* may get rid of */
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.ticTacToe td {
+  border: 1px solid #000;
+
+  width: 8vw;
+  min-width: 50px;
+  max-width: 250px;
+
+  height: 8vw;
+  min-height: 50px;
+  max-height: 250px;
+
+  text-align: center;
+  font-size: calc(25px + 1.8vw);
+  font-family: "Architects Daughter", cursive;
+  font-weight: 400;
+}

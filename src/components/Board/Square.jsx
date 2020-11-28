@@ -27,7 +27,7 @@ export default function Square(props) {
         setSquares(squaresCopy);
       }
     },
-    [squares, setSquares, player, setPlayer, winner]
+    [squares, setSquares, player, setPlayer, winner, currentSquareState]
   );
 
   const squareColor = useMemo(() => {

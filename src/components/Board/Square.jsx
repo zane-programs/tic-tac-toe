@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo, useState } from "react";
+import React, { useCallback, useContext, useMemo, useState } from "react";
 import GameContext from "../../context/GameContext";
 
 const PLAYER_COLORS = {

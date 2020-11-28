@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Board from "./components/Board";
 import GameContext from "./context/GameContext";
 import { calculateWinner } from "./core/gameUtil";

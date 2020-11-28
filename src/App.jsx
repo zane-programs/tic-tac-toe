@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Board from "./components/Board";
 import GameContext from "./context/GameContext";
 import { calculateWinner } from "./core/gameUtil";
@@ -18,6 +18,24 @@ function App() {
     if (winnerCalc) setWinner(winnerCalc);
   }, [squares, setWinner]);
 
+  // button to play again (once there is a winner)
+  const replayButton = useMemo(
+    () =>
+      winner || squares.filter((sq) => sq === null).length === 0 ? (
+        <button
+          onClick={() => {
+            // reset game state
+            setSquares(Array(9).fill(null));
+            setPlayer("X");
+            setWinner(null);
+          }}
+        >
+          Play Again
+        </button>
+      ) : null,
+    [winner, squares]
+  );
+
   return (
     <>
       <p>Current Player: {PLAYERS[player]}</p>
@@ -34,6 +52,7 @@ function App() {
       >
         <Board />
       </GameContext.Provider>
+      {replayButton}
       <p>{JSON.stringify(squares)}</p>
     </>
   );

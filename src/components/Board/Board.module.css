@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
 
 .ticTacToe {
+  cursor: default;
+
   border-collapse: collapse;
   -webkit-user-select: none;
   -moz-user-select: none;

@@ -20,7 +20,7 @@ export default function Square(props) {
 
   const handleSquareClick = useCallback(
     (squareIndex) => {
-      if (!winner && !squares[squareIndex]) {
+      if (!winner && !currentSquareState) {
         let squaresCopy = squares.slice();
         squaresCopy[squareIndex] = player; // X or O
         setPlayer(player === "X" ? "O" : "X"); // other player plays now

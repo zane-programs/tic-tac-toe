@@ -1,6 +1,6 @@
 import styles from "./Board.module.css";
 import GameContext from "../../context/GameContext";
-import { useCallback, useContext, useMemo } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 
 const PLAYER_COLORS = {
   X: "#f00",
@@ -34,6 +34,13 @@ function Square(props) {
     GameContext
   );
 
+  const [hoverState, setHoverState] = useState(false);
+
+  const currentSquareState = useMemo(() => squares[props.index], [
+    squares,
+    props.index,
+  ]);
+
   const handleSquareClick = useCallback(
     (squareIndex) => {
       if (!winner && !squares[squareIndex]) {
@@ -47,13 +54,23 @@ function Square(props) {
   );
 
   const squareColor = useMemo(() => {
-    if (!squares[props.index]) return "#000";
-    return PLAYER_COLORS[squares[props.index]];
-  }, [squares, props.index]);
+    if (currentSquareState === null) return "#aaa";
+    return PLAYER_COLORS[currentSquareState];
+  }, [currentSquareState]);
 
   return (
-    <td onClick={() => handleSquareClick(props.index)}>
-      <span style={{ color: squareColor }}>{squares[props.index]}</span>
+    <td
+      onClick={() => handleSquareClick(props.index)}
+      onMouseOver={() => setHoverState(true)}
+      onMouseOut={() => setHoverState(false)}
+    >
+      <span style={{ color: squareColor }}>
+        {currentSquareState
+          ? currentSquareState
+          : hoverState && !winner
+          ? player
+          : null}
+      </span>
     </td>
   );
 }
